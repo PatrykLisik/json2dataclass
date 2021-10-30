@@ -4,9 +4,9 @@ from sanic.response import text
 app = Sanic("Json2Dataclass")
 
 
-@app.get("/")
+@app.post("/")
 async def hello_world(request):
-    return text("Hello, world.")
+    return text("Hello, world")
 
 
 if __name__ == "__main__":
