@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build:
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/dev/Dockerfile
     ports:
       - "8000:8000"
     volumes:

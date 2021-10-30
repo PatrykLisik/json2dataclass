@@ -4,7 +4,7 @@ from sanic.response import text
 app = Sanic("Json2Dataclass")
 
 
-@app.post("/")
+@app.get("/")
 async def hello_world(request):
     return text("Hello, world")
 
