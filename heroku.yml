@@ -1,6 +1,6 @@
 build:
   docker:
-    web: docker/heroku/Dockerfile
+    web: Dockerfile
 run:
     worker:
       image: web
