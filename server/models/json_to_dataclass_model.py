@@ -1,11 +1,21 @@
 from dataclasses import dataclass, field
 from numbers import Number
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Set
 
 
 @dataclass
 class JsonDictModelField:
-    pass
+    def __init__(self, json_object: Union[Dict, List, Set]):
+        pass
+
+
+@dataclass
+class JsonCollectionModel:
+    typeName: str
+    fields: List[JsonDictModelField]
+
+    def __init__(self, json_data: Union[Set, List]):
+        pass
 
 
 @dataclass
@@ -30,3 +40,8 @@ class JsonDictModelField:
             self.value = JsonDictModel(value)
         else:
             self.value = value
+
+
+@dataclass
+class JsonModel:
+    data: Union[JsonCollectionModel, JsonDictModel]
