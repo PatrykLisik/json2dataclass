@@ -1,3 +1,5 @@
+import pytest
+
 from server.models.dataclass_model import PythonDataModel
 
 
@@ -33,4 +35,4 @@ def test_nested_dict_mapping():
 def test_homogenous_list_mapping():
     data = [1, 2, 3, 4, 5]
     mapped_model = PythonDataModel(data)
-    assert len(mapped_model) == 1
+    assert len(mapped_model.data) == 1

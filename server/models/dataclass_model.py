@@ -1,8 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Set, Dict, Union, Iterable
 
-from server.models.json_to_dataclass_model import JsonModel
-
 
 @dataclass
 class PythonDataClassModelField:
@@ -48,7 +46,7 @@ class PythonDataModel:
                 for key, value in obj_value.items():
                     type_name = generate_class_name(value, class_list)
                     # add to que is not primitive type
-                    if is_primitive(value):
+                    if not is_primitive(value):
                         obj_to_analyze.append(QueObject(type_name=type_name, data=value))
                     obj_value = PythonDataClassModelField(filed_name=key, type_name=type_name)
                     fields.append(obj_value)
