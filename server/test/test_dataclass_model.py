@@ -46,3 +46,18 @@ def test_list_of_heterogeneous_primitive_types():
     assert len(mapped_model.data) == 1
     list_class = mapped_model.data.pop()
     assert list_class.fields.pop().type_name.startswith("list[Union[")
+
+
+def test_list_of_dicts():
+    data = [
+        {
+            "test_int": 10,
+            "test_str": "aaabbb"
+        },
+
+        {
+            "test_int": 10
+        }
+    ]
+    mapped_model = PythonDataModel(data)
+    assert len(mapped_model.data) == 3

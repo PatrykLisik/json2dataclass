@@ -54,12 +54,12 @@ class PythonDataModel:
             if isinstance(obj_value, Iterable):
                 types_in_list = set()
                 iterable_type = type(obj_value).__name__
-                for value in obj_value:
+                for index, value in enumerate(obj_value):
                     type_name = generate_class_name(value, class_list)
                     types_in_list.add(type_name)
                     # add to que is not primitive type
                     if not is_primitive(value):
-                        obj_to_analyze.append(QueObject(type_name=type_name, data=value))
+                        obj_to_analyze.append(QueObject(type_name=type_name + "_" + str(index), data=value))
 
                 if len(types_in_list) == 1:
                     # example List[int]
