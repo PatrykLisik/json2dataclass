@@ -10,16 +10,16 @@ class JsonDictModelField:
 
 @dataclass
 class JsonDictModel:
-    fields: List[JsonDictModelField] = field(default_factory=list)
+    fields: Dict[str, JsonDictModelField] = field(default_factory=dict)
 
     def __init__(self, json_object: dict):
-        fields = []
+        fields = {}
         for key, value in json_object.items():
-            fields.append(JsonDictModelField(key=key, value=value))
+            fields[key] = JsonDictModelField(key=key, value=value)
         self.fields = fields
 
 
-@dataclass
+@dataclass(eq=True)
 class JsonDictModelField:
     key: str = field(hash=True)
     value: Union[str, Number, List, JsonDictModel]
