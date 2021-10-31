@@ -58,12 +58,12 @@ class PythonDataModel:
                     type_name = generate_class_name(value, class_list)
                     types_in_list.add(type_name)
                     # add to que is not primitive type
-                    if is_primitive(value):
+                    if not is_primitive(value):
                         obj_to_analyze.append(QueObject(type_name=type_name, data=value))
 
                 if len(types_in_list) == 1:
                     # example List[int]
-                    type_name = f"{iterable_type}[{types_in_list.pop()}]]"
+                    type_name = f"{iterable_type}[{types_in_list.pop()}]"
                 else:
                     # example List[Union[int,str]]
                     type_name = f"{iterable_type}[Union[{','.join(types_in_list)}]]"
