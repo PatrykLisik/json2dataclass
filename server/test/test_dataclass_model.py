@@ -1,5 +1,3 @@
-import pytest
-
 from server.models.dataclass_model import PythonDataModel
 
 
@@ -12,6 +10,9 @@ def test_simple_dict_mapping():
 
     mapped_model = PythonDataModel(data)
     assert len(mapped_model.data) == 1
+
+    generate_code = mapped_model.generate_code()
+    exec(generate_code, globals(), globals())
 
 
 def test_nested_dict_mapping():
@@ -31,6 +32,9 @@ def test_nested_dict_mapping():
     mapped_model = PythonDataModel(data)
     assert len(mapped_model.data) == 4
 
+    generate_code = mapped_model.generate_code()
+    exec(generate_code, globals(), globals())
+
 
 def test_homogenous_list_mapping():
     data = [1, 2, 3, 4, 5]
@@ -38,6 +42,9 @@ def test_homogenous_list_mapping():
     assert len(mapped_model.data) == 1
     list_class = mapped_model.data.pop()
     assert list_class.fields.pop().type_name == "list[int]"
+
+    generate_code = mapped_model.generate_code()
+    exec(generate_code, globals(), globals())
 
 
 def test_list_of_heterogeneous_primitive_types():
@@ -47,6 +54,8 @@ def test_list_of_heterogeneous_primitive_types():
     list_class = mapped_model.data.pop()
     assert list_class.fields.pop().type_name.startswith("list[Union[")
 
+    generate_code = mapped_model.generate_code()
+    exec(generate_code, globals(), globals())
 
 def test_list_of_dicts():
     data = [
@@ -61,3 +70,6 @@ def test_list_of_dicts():
     ]
     mapped_model = PythonDataModel(data)
     assert len(mapped_model.data) == 3
+
+    generate_code = mapped_model.generate_code()
+    exec(generate_code, globals(), globals())

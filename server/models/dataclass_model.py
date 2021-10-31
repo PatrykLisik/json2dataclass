@@ -13,6 +13,12 @@ class PythonClassModel:
     name: str
     fields: List[PythonDataClassModelField] = field(default_factory=list)
 
+    def generate_code(self) -> str:
+        out = f"@dataclass\nclass {self.name}:"
+        for field in self.fields:
+            out = out + f"\n    {field.filed_name}: {field.type_name}"
+        return out
+
 
 @dataclass
 class QueObject:
@@ -56,17 +62,19 @@ class PythonDataModel:
                 iterable_type = type(obj_value).__name__
                 for index, value in enumerate(obj_value):
                     type_name = generate_class_name(value, class_list)
-                    types_in_list.add(type_name)
                     # add to que is not primitive type
                     if not is_primitive(value):
-                        obj_to_analyze.append(QueObject(type_name=type_name + "_" + str(index), data=value))
+                        type_name += "_" + str(index)
+                        obj_to_analyze.append(QueObject(type_name, data=value))
+
+                    types_in_list.add(type_name)
 
                 if len(types_in_list) == 1:
                     # example List[int]
                     type_name = f"{iterable_type}[{types_in_list.pop()}]"
                 else:
-                    # example List[Union[int,str]]
-                    type_name = f"{iterable_type}[Union[{','.join(types_in_list)}]]"
+                    # example List[Union[int, str]]
+                    type_name = f"{iterable_type}[Union[{', '.join(types_in_list)}]]"
                 class_list.append(
                     PythonClassModel(name=obj.type_name, fields=[
                         PythonDataClassModelField(type_name=type_name, filed_name="items")]
@@ -74,3 +82,12 @@ class PythonDataModel:
                 )
 
         self.data = class_list[::-1]
+
+    def generate_code(self):
+        dataclasses_imports = "from dataclasses import dataclass, field"
+        typing_imports = "from typing import List, Set, Dict, Union, Iterable"
+
+        output = f"{typing_imports}\n{dataclasses_imports}"
+        for class_model in self.data:
+            output += "\n\n\n" + class_model.generate_code()
+        return output
