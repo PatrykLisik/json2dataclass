@@ -1,1 +1,1 @@
-# json2dataclass
+# json2dataclass [![CircleCI](https://circleci.com/gh/PatrykLisik/json2dataclass/tree/master.svg?style=svg)](https://circleci.com/gh/PatrykLisik/json2dataclass/tree/master)
