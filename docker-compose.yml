@@ -8,10 +8,14 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+    command: sanic server.sanic_app.app --auto-reload  --host 0.0.0.0 --port 8000
   web:
     build:
       context: ./json2dataclass_client
       dockerfile: Dockerfile
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
     ports:
       - "3000:3000"
     volumes:

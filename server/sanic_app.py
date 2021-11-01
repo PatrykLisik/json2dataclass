@@ -13,4 +13,3 @@ async def to_dataclass(request):
     return json({
         "dataclass": mapped_model
     })
-

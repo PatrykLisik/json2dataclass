@@ -2,9 +2,9 @@
   "name": "json2dataclass_client",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host $HOST --port $PORT",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview --host $HOST --port $PORT"
   },
   "dependencies": {
     "vue": "^3.2.16"
