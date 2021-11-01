@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite --host $HOST --port $PORT",
     "build": "vite build",
-    "serve": "vite preview --host $HOST --port $PORT"
+    "serve": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "vue": "^3.2.16"
