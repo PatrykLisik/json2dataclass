@@ -6,6 +6,4 @@ run:
   server: sanic server.sanic_app.app --host 0.0.0.0 --port $PORT
   web: npm run serve
   worker:
-    image:
-     - web
-     - client
+    image: web
