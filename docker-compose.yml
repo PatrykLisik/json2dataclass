@@ -1,9 +1,20 @@
 version: '3'
 services:
-  web:
+  server:
     build:
-      dockerfile: docker/dev/Dockerfile
+      context: ./server
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - .:/app
+  web:
+    build:
+      context: ./json2dataclass_client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./json2dataclass_client:/usr/app/
+      - /usr/app/node_modules
+    command: npm run dev
