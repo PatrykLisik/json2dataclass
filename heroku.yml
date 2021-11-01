@@ -3,11 +3,5 @@ build:
     server: server/Dockerfile
     client: json2dataclass_client/Dockerfile
 run:
-  worker:
-    comand:
-      - sanic server.sanic_app.app --host 0.0.0.0 --port $PORT
-    image: server
-  web:
-    comand:
-      - npm run serve
-    image: web
+  server: sanic server.sanic_app.app --host 0.0.0.0 --port $PORT
+  client: npm run serve
