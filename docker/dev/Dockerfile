@@ -6,4 +6,4 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 EXPOSE 8000:8000
-CMD ["python", "sanic_app.py"]
+CMD ["python", "./server/sanic_app.py"]
