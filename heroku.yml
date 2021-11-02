@@ -1,7 +1,5 @@
 build:
   docker:
-    server: server/Dockerfile
-    web: json2dataclass_client/Dockerfile
+    web: Dockerfile
 run:
-  server: sanic server.sanic_app.app --host 0.0.0.0 --port $PORT
-  web: npm run serve
+  web: npm run serve --port $PORT
