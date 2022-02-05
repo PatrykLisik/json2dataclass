@@ -3,38 +3,59 @@
 
 <head>
     <title>json2Dataclass</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-<input type="button" id="generate-btn" value="Generate"/>
+
+<header>
+    <div class="json2Dataclass-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">json2Dataclass</h1>
+        <p class="fs-5 text-muted">Generate python dataclasses from json NOW!</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row h-100">
+        <div class="col h-100">
+            <textarea rows="10" cols="100" id="json_text_area">
+               {
+                "test_int": 10,
+            "test_str": "aaabbb"
+        }
+            </textarea>
+        </div>
+        <div class="col">
+            <textarea style="width: 100%; height: 100%;" id="code_text_area"></textarea>
+        </div>
+    </div>
+    <input type="button" class="btn btn-primary" id="generate-btn" value="Generate"/>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 <script type=text/javascript> const button = document.getElementById('generate-btn');
 console.log('Button init ;)');
-button.addEventListener('click', async _ => {
-    try {
-        console.log('Button click');
-        const response = await fetch('/api/to_dataclass', {
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "json_to_convert": [
-                    {
-                        "test_int": 10,
-                        "test_str": "aaabbb"
-                    },
-                    {
-                        "test_int": 10
-                    }
-                ]
-            })
+button.addEventListener('click', async _ =>
+    fetch('/api/to_dataclass', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            json_to_convert: JSON.parse(document.getElementById("json_text_area").value)
         })
-        console.log('Completed!', response);
-    } catch (err) {
-        console.error(`Error: ${err}`);
-    }
-})
+    })
+        .then(response => response.json())
+        .then(response_json => {
+            console.log('response_json', response_json);
+            document.getElementById("code_text_area").value = response_json.dataclass
+        })
+    .catch(err=>console.error(err))
+)
+
+
 </script>
 </html>
