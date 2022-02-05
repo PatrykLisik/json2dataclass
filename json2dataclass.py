@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, abort
 
 from .models.dataclass_model import PythonDataModel
 
-app = Flask(__name__,static_folder="")
+app = Flask(__name__, static_folder="")
 
 
 @app.post("/api/to_dataclass")

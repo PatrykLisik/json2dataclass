@@ -1,4 +1,4 @@
-from models.dataclass_model import PythonDataModel
+from json2dataclass.models.dataclass_model import PythonDataModel
 
 
 def test_simple_dict_mapping():
