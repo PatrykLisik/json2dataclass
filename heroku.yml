@@ -2,6 +2,6 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: sanic server.sanic_app.app --host 0.0.0.0 --port $PORT
+  web: flask run --host 0.0.0.0 --port  $PORT
   worker:
     image: web
