@@ -1,4 +1,4 @@
-from server.models.dataclass_model import PythonDataModel
+from models.dataclass_model import PythonDataModel
 
 
 def test_simple_dict_mapping():
