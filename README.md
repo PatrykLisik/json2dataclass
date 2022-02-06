@@ -1,4 +1,4 @@
-# json2dataclass [![Build Status](https://app.travis-ci.com/PatrykLisik/json2dataclass.svg?branch=master)](https://app.travis-ci.com/PatrykLisik/json2dataclass)
+# json2dataclass [![CircleCI](https://circleci.com/gh/PatrykLisik/json2dataclass/tree/master.svg?style=svg)](https://circleci.com/gh/PatrykLisik/json2dataclass/tree/master)
 
 Heroku link: https://json2dataclass.herokuapp.com/
 ## Motivation
